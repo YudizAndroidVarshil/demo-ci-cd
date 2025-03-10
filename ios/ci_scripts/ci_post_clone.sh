@@ -5,27 +5,23 @@ set -e
 # Change working directory to the root of your cloned repo.
 cd "$CI_PRIMARY_REPOSITORY_PATH"
 
-# Clone the Flutter repo.
-git clone https://github.com/flutter/flutter.git --depth 1 "$HOME/flutter"
+# Clone the specific Flutter version 3.27.1 directly.
+git clone --branch 3.27.1 --depth 1 https://github.com/flutter/flutter.git "$HOME/flutter"
 
-# Switch to Flutter version 3.27.1.
-cd "$HOME/flutter"
-git checkout 3.27.1
-
-# Add Flutter to PATH.
+# Add Flutter to the PATH.
 export PATH="$PATH:$HOME/flutter/bin"
 
-# Cache iOS artifacts.
+# Pre-cache iOS artifacts.
 flutter precache --ios
 
-# Return to your project root and install Flutter dependencies.
+# Return to the project root and install Flutter dependencies.
 cd "$CI_PRIMARY_REPOSITORY_PATH"
 flutter pub get
 
-# Install CocoaPods using Homebrew (disable auto-update).
+# Install CocoaPods (disabling Homebrew auto-update).
 HOMEBREW_NO_AUTO_UPDATE=1 brew install cocoapods
 
-# Install CocoaPods dependencies in the iOS directory.
+# Install CocoaPods dependencies.
 cd ios && pod install
 
 exit 0
