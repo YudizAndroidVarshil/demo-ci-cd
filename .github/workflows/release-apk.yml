@@ -19,7 +19,6 @@ jobs:
           flutter-version: '3.27.1'  # Specify your required Flutter version
 
       # Step 3: Install dependencies
-      - run: flutter clean
       - run: flutter pub get
 
       # Step 4: Build the release APK
