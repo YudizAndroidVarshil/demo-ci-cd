@@ -10,7 +10,7 @@ git clone https://github.com/flutter/flutter.git --depth 1 "$HOME/flutter"
 
 # Switch to Flutter version 3.27.1.
 cd "$HOME/flutter"
-git checkout tags/3.27.1
+git checkout 3.27.1
 
 # Add Flutter to PATH.
 export PATH="$PATH:$HOME/flutter/bin"
