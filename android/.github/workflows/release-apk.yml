@@ -1,0 +1,33 @@
+name: Flutter CI/CD
+
+on:
+  push:
+    branches:
+      - main  # Change this to your branch name if needed
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out your repository
+      - uses: actions/checkout@v3
+
+      # Step 2: Set up Flutter environment
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.27.1'  # Specify your required Flutter version
+
+      # Step 3: Install dependencies
+      - run: flutter clean
+      - run: flutter pub get
+
+      # Step 4: Build the release APK
+      - run: flutter build apk --release
+
+      # Step 5 (Optional): Upload the APK as an artifact
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-release.apk
+          path: build/app/outputs/flutter-apk/app-release.apk
